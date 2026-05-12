@@ -1,0 +1,888 @@
+<!DOCTYPE html>
+<html lang="zh-TW"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Boccia Score">
+    <title>地板滾球智慧記分板 (通用版)</title>
+    <script src="./地板滾球智慧記分板 (通用版)_files/lucide@latest"></script>
+    <style>
+        button { touch-action: manipulation; -webkit-tap-highlight-color: transparent; user-select: none; }
+        .no-select { user-select: none; -webkit-user-select: none; }
+        body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+        .boccia-ball { transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); background-color: transparent; }
+        .ball-red { border: 3px solid #dc2626; }
+        .ball-red.ball-filled { background-color: #dc2626; box-shadow: 0 0 8px rgba(220, 38, 38, 0.6); }
+        .ball-blue { border: 3px solid #0284c7; }
+        .ball-blue.ball-filled { background-color: #0284c7; box-shadow: 0 0 8px rgba(2, 132, 199, 0.6); }
+        
+        /* 隱藏捲軸但保留捲動功能 */
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+<style>*, ::before, ::after{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgb(59 130 246 / 0.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/* ! tailwindcss v3.4.17 | MIT License | https://tailwindcss.com */*,::after,::before{box-sizing:border-box;border-width:0;border-style:solid;border-color:#e5e7eb}::after,::before{--tw-content:''}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;tab-size:4;font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0;padding:0}legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.pointer-events-none{pointer-events:none}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.inset-0{inset:0px}.left-0{left:0px}.top-0{top:0px}.z-10{z-index:10}.z-50{z-index:50}.z-\[100\]{z-index:100}.z-\[110\]{z-index:110}.z-\[130\]{z-index:130}.mx-1{margin-left:0.25rem;margin-right:0.25rem}.mx-auto{margin-left:auto;margin-right:auto}.my-6{margin-top:1.5rem;margin-bottom:1.5rem}.mb-1{margin-bottom:0.25rem}.mb-10{margin-bottom:2.5rem}.mb-12{margin-bottom:3rem}.mb-2{margin-bottom:0.5rem}.mb-3{margin-bottom:0.75rem}.mb-4{margin-bottom:1rem}.mb-6{margin-bottom:1.5rem}.mb-8{margin-bottom:2rem}.mt-1{margin-top:0.25rem}.mt-4{margin-top:1rem}.mt-8{margin-top:2rem}.mt-\[-10px\]{margin-top:-10px}.flex{display:flex}.grid{display:grid}.hidden{display:none}.h-1{height:0.25rem}.h-12{height:3rem}.h-14{height:3.5rem}.h-2{height:0.5rem}.h-20{height:5rem}.h-3{height:0.75rem}.h-4{height:1rem}.h-6{height:1.5rem}.h-full{height:100%}.h-screen{height:100vh}.h-8{height:2rem}.max-h-\[80vh\]{max-height:80vh}.max-h-\[85vh\]{max-height:85vh}.min-h-\[160px\]{min-height:160px}.min-h-\[200px\]{min-height:200px}.min-h-\[400px\]{min-height:400px}.w-12{width:3rem}.w-20{width:5rem}.w-4{width:1rem}.w-6{width:1.5rem}.w-full{width:100%}.w-8{width:2rem}.max-w-2xl{max-width:42rem}.max-w-4xl{max-width:56rem}.max-w-\[1800px\]{max-width:1800px}.max-w-\[320px\]{max-width:320px}.max-w-lg{max-width:32rem}.max-w-md{max-width:28rem}.max-w-sm{max-width:24rem}.flex-1{flex:1 1 0%}.shrink-0{flex-shrink:0}.flex-grow{flex-grow:1}.scale-\[1\.02\]{--tw-scale-x:1.02;--tw-scale-y:1.02;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}@keyframes pulse{50%{opacity:.5}}.animate-pulse{animation:pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite}.cursor-pointer{cursor:pointer}.select-none{-webkit-user-select:none;user-select:none}.grid-cols-1{grid-template-columns:repeat(1, minmax(0, 1fr))}.grid-cols-2{grid-template-columns:repeat(2, minmax(0, 1fr))}.flex-col{flex-direction:column}.items-end{align-items:flex-end}.items-center{align-items:center}.items-stretch{align-items:stretch}.justify-center{justify-content:center}.justify-between{justify-content:space-between}.gap-1{gap:0.25rem}.gap-2{gap:0.5rem}.gap-3{gap:0.75rem}.gap-4{gap:1rem}.gap-6{gap:1.5rem}.gap-8{gap:2rem}.space-y-3 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(0.75rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(0.75rem * var(--tw-space-y-reverse))}.space-y-4 > :not([hidden]) ~ :not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1rem * var(--tw-space-y-reverse))}.overflow-hidden{overflow:hidden}.overflow-y-auto{overflow-y:auto}.overscroll-contain{overscroll-behavior:contain}.truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.rounded{border-radius:0.25rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-\[3rem\]{border-radius:3rem}.rounded-full{border-radius:9999px}.rounded-lg{border-radius:0.5rem}.rounded-xl{border-radius:0.75rem}.border{border-width:1px}.border-2{border-width:2px}.border-4{border-width:4px}.border-t-8{border-top-width:8px}.border-amber-500\/50{border-color:rgb(245 158 11 / 0.5)}.border-red-500\/20{border-color:rgb(239 68 68 / 0.2)}.border-red-500\/30{border-color:rgb(239 68 68 / 0.3)}.border-red-500\/50{border-color:rgb(239 68 68 / 0.5)}.border-red-600{--tw-border-opacity:1;border-color:rgb(220 38 38 / var(--tw-border-opacity, 1))}.border-red-900\/30{border-color:rgb(127 29 29 / 0.3)}.border-sky-500\/20{border-color:rgb(14 165 233 / 0.2)}.border-sky-500\/30{border-color:rgb(14 165 233 / 0.3)}.border-sky-500\/50{border-color:rgb(14 165 233 / 0.5)}.border-sky-600{--tw-border-opacity:1;border-color:rgb(2 132 199 / var(--tw-border-opacity, 1))}.border-sky-900\/30{border-color:rgb(12 74 110 / 0.3)}.border-slate-500{--tw-border-opacity:1;border-color:rgb(100 116 139 / var(--tw-border-opacity, 1))}.border-slate-600{--tw-border-opacity:1;border-color:rgb(71 85 105 / var(--tw-border-opacity, 1))}.border-slate-700{--tw-border-opacity:1;border-color:rgb(51 65 85 / var(--tw-border-opacity, 1))}.border-red-800{--tw-border-opacity:1;border-color:rgb(153 27 27 / var(--tw-border-opacity, 1))}.border-sky-800{--tw-border-opacity:1;border-color:rgb(7 89 133 / var(--tw-border-opacity, 1))}.bg-amber-900\/40{background-color:rgb(120 53 15 / 0.4)}.bg-black\/80{background-color:rgb(0 0 0 / 0.8)}.bg-black\/90{background-color:rgb(0 0 0 / 0.9)}.bg-black\/95{background-color:rgb(0 0 0 / 0.95)}.bg-blue-600{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.bg-emerald-600{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.bg-red-600{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.bg-red-600\/10{background-color:rgb(220 38 38 / 0.1)}.bg-red-800{--tw-bg-opacity:1;background-color:rgb(153 27 27 / var(--tw-bg-opacity, 1))}.bg-red-900\/20{background-color:rgb(127 29 29 / 0.2)}.bg-red-900\/30{background-color:rgb(127 29 29 / 0.3)}.bg-red-900\/40{background-color:rgb(127 29 29 / 0.4)}.bg-sky-600\/10{background-color:rgb(2 132 199 / 0.1)}.bg-sky-800{--tw-bg-opacity:1;background-color:rgb(7 89 133 / var(--tw-bg-opacity, 1))}.bg-sky-900\/20{background-color:rgb(12 74 110 / 0.2)}.bg-sky-900\/30{background-color:rgb(12 74 110 / 0.3)}.bg-slate-600{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.bg-slate-700{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.bg-slate-700\/50{background-color:rgb(51 65 85 / 0.5)}.bg-slate-800{--tw-bg-opacity:1;background-color:rgb(30 41 59 / var(--tw-bg-opacity, 1))}.bg-slate-800\/50{background-color:rgb(30 41 59 / 0.5)}.bg-slate-900{--tw-bg-opacity:1;background-color:rgb(15 23 42 / var(--tw-bg-opacity, 1))}.bg-slate-900\/30{background-color:rgb(15 23 42 / 0.3)}.bg-slate-900\/40{background-color:rgb(15 23 42 / 0.4)}.bg-slate-900\/50{background-color:rgb(15 23 42 / 0.5)}.bg-slate-900\/95{background-color:rgb(15 23 42 / 0.95)}.bg-transparent{background-color:transparent}.bg-red-900\/50{background-color:rgb(127 29 29 / 0.5)}.bg-sky-900\/50{background-color:rgb(12 74 110 / 0.5)}.bg-gradient-to-r{background-image:linear-gradient(to right, var(--tw-gradient-stops))}.from-amber-600{--tw-gradient-from:#d97706 var(--tw-gradient-from-position);--tw-gradient-to:rgb(217 119 6 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.from-red-500{--tw-gradient-from:#ef4444 var(--tw-gradient-from-position);--tw-gradient-to:rgb(239 68 68 / 0) var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), var(--tw-gradient-to)}.via-purple-500{--tw-gradient-to:rgb(168 85 247 / 0)  var(--tw-gradient-to-position);--tw-gradient-stops:var(--tw-gradient-from), #a855f7 var(--tw-gradient-via-position), var(--tw-gradient-to)}.to-sky-500{--tw-gradient-to:#0ea5e9 var(--tw-gradient-to-position)}.to-yellow-400{--tw-gradient-to:#facc15 var(--tw-gradient-to-position)}.p-10{padding:2.5rem}.p-2{padding:0.5rem}.p-4{padding:1rem}.p-6{padding:1.5rem}.p-8{padding:2rem}.px-1{padding-left:0.25rem;padding-right:0.25rem}.px-10{padding-left:2.5rem;padding-right:2.5rem}.px-2{padding-left:0.5rem;padding-right:0.5rem}.px-3{padding-left:0.75rem;padding-right:0.75rem}.px-6{padding-left:1.5rem;padding-right:1.5rem}.px-8{padding-left:2rem;padding-right:2rem}.py-1{padding-top:0.25rem;padding-bottom:0.25rem}.py-2{padding-top:0.5rem;padding-bottom:0.5rem}.py-3{padding-top:0.75rem;padding-bottom:0.75rem}.py-4{padding-top:1rem;padding-bottom:1rem}.py-5{padding-top:1.25rem;padding-bottom:1.25rem}.px-4{padding-left:1rem;padding-right:1rem}.pb-2{padding-bottom:0.5rem}.text-center{text-align:center}.font-mono{font-family:ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace}.font-sans{font-family:ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-4xl{font-size:2.25rem;line-height:2.5rem}.text-5xl{font-size:3rem;line-height:1}.text-8xl{font-size:6rem;line-height:1}.text-9xl{font-size:8rem;line-height:1}.text-\[10px\]{font-size:10px}.text-\[7rem\]{font-size:7rem}.text-\[8rem\]{font-size:8rem}.text-base{font-size:1rem;line-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:0.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:0.75rem;line-height:1rem}.font-black{font-weight:900}.font-bold{font-weight:700}.font-medium{font-weight:500}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-none{line-height:1}.tracking-\[0\.5em\]{letter-spacing:0.5em}.tracking-widest{letter-spacing:0.1em}.text-amber-300{--tw-text-opacity:1;color:rgb(252 211 77 / var(--tw-text-opacity, 1))}.text-amber-400{--tw-text-opacity:1;color:rgb(251 191 36 / var(--tw-text-opacity, 1))}.text-amber-500{--tw-text-opacity:1;color:rgb(245 158 11 / var(--tw-text-opacity, 1))}.text-blue-400{--tw-text-opacity:1;color:rgb(96 165 250 / var(--tw-text-opacity, 1))}.text-red-100{--tw-text-opacity:1;color:rgb(254 226 226 / var(--tw-text-opacity, 1))}.text-red-300{--tw-text-opacity:1;color:rgb(252 165 165 / var(--tw-text-opacity, 1))}.text-red-300\/70{color:rgb(252 165 165 / 0.7)}.text-red-400{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.text-red-500{--tw-text-opacity:1;color:rgb(239 68 68 / var(--tw-text-opacity, 1))}.text-red-500\/30{color:rgb(239 68 68 / 0.3)}.text-sky-100{--tw-text-opacity:1;color:rgb(224 242 254 / var(--tw-text-opacity, 1))}.text-sky-300\/70{color:rgb(125 211 252 / 0.7)}.text-sky-400{--tw-text-opacity:1;color:rgb(56 189 248 / var(--tw-text-opacity, 1))}.text-sky-500{--tw-text-opacity:1;color:rgb(14 165 233 / var(--tw-text-opacity, 1))}.text-sky-500\/30{color:rgb(14 165 233 / 0.3)}.text-slate-200{--tw-text-opacity:1;color:rgb(226 232 240 / var(--tw-text-opacity, 1))}.text-slate-300{--tw-text-opacity:1;color:rgb(203 213 225 / var(--tw-text-opacity, 1))}.text-slate-400{--tw-text-opacity:1;color:rgb(148 163 184 / var(--tw-text-opacity, 1))}.text-slate-500{--tw-text-opacity:1;color:rgb(100 116 139 / var(--tw-text-opacity, 1))}.text-slate-600{--tw-text-opacity:1;color:rgb(71 85 105 / var(--tw-text-opacity, 1))}.text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.text-red-200{--tw-text-opacity:1;color:rgb(254 202 202 / var(--tw-text-opacity, 1))}.text-sky-200{--tw-text-opacity:1;color:rgb(186 230 253 / var(--tw-text-opacity, 1))}.placeholder-red-800\/50::placeholder{color:rgb(153 27 27 / 0.5)}.placeholder-sky-800\/50::placeholder{color:rgb(7 89 133 / 0.5)}.opacity-60{opacity:0.6}.shadow-2xl{--tw-shadow:0 25px 50px -12px rgb(0 0 0 / 0.25);--tw-shadow-colored:0 25px 50px -12px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-lg{--tw-shadow:0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 10px 15px -3px var(--tw-shadow-color), 0 4px 6px -4px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-xl{--tw-shadow:0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);--tw-shadow-colored:0 20px 25px -5px var(--tw-shadow-color), 0 8px 10px -6px var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.shadow-sm{--tw-shadow:0 1px 2px 0 rgb(0 0 0 / 0.05);--tw-shadow-colored:0 1px 2px 0 var(--tw-shadow-color);box-shadow:var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow)}.ring-4{--tw-ring-offset-shadow:var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);--tw-ring-shadow:var(--tw-ring-inset) 0 0 0 calc(4px + var(--tw-ring-offset-width)) var(--tw-ring-color);box-shadow:var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000)}.ring-red-500{--tw-ring-opacity:1;--tw-ring-color:rgb(239 68 68 / var(--tw-ring-opacity, 1))}.ring-sky-500{--tw-ring-opacity:1;--tw-ring-color:rgb(14 165 233 / var(--tw-ring-opacity, 1))}.drop-shadow-2xl{--tw-drop-shadow:drop-shadow(0 25px 25px rgb(0 0 0 / 0.15));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.drop-shadow-lg{--tw-drop-shadow:drop-shadow(0 10px 8px rgb(0 0 0 / 0.04)) drop-shadow(0 4px 3px rgb(0 0 0 / 0.1));filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.backdrop-blur-md{--tw-backdrop-blur:blur(12px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.backdrop-blur-sm{--tw-backdrop-blur:blur(4px);-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.transition{transition-property:color, background-color, border-color, fill, stroke, opacity, box-shadow, transform, filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;transition-property:color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter, -webkit-text-decoration-color, -webkit-backdrop-filter;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4, 0, 0.2, 1);transition-duration:150ms}.duration-300{transition-duration:300ms}.hover\:border-red-500:hover{--tw-border-opacity:1;border-color:rgb(239 68 68 / var(--tw-border-opacity, 1))}.hover\:border-sky-500:hover{--tw-border-opacity:1;border-color:rgb(14 165 233 / var(--tw-border-opacity, 1))}.hover\:bg-amber-900\/60:hover{background-color:rgb(120 53 15 / 0.6)}.hover\:bg-blue-500:hover{--tw-bg-opacity:1;background-color:rgb(59 130 246 / var(--tw-bg-opacity, 1))}.hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgb(37 99 235 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-500:hover{--tw-bg-opacity:1;background-color:rgb(16 185 129 / var(--tw-bg-opacity, 1))}.hover\:bg-emerald-600:hover{--tw-bg-opacity:1;background-color:rgb(5 150 105 / var(--tw-bg-opacity, 1))}.hover\:bg-red-600:hover{--tw-bg-opacity:1;background-color:rgb(220 38 38 / var(--tw-bg-opacity, 1))}.hover\:bg-red-700:hover{--tw-bg-opacity:1;background-color:rgb(185 28 28 / var(--tw-bg-opacity, 1))}.hover\:bg-red-900\/30:hover{background-color:rgb(127 29 29 / 0.3)}.hover\:bg-red-900\/50:hover{background-color:rgb(127 29 29 / 0.5)}.hover\:bg-red-900\/60:hover{background-color:rgb(127 29 29 / 0.6)}.hover\:bg-sky-600:hover{--tw-bg-opacity:1;background-color:rgb(2 132 199 / var(--tw-bg-opacity, 1))}.hover\:bg-sky-700:hover{--tw-bg-opacity:1;background-color:rgb(3 105 161 / var(--tw-bg-opacity, 1))}.hover\:bg-sky-900\/50:hover{background-color:rgb(12 74 110 / 0.5)}.hover\:bg-slate-600:hover{--tw-bg-opacity:1;background-color:rgb(71 85 105 / var(--tw-bg-opacity, 1))}.hover\:bg-slate-700:hover{--tw-bg-opacity:1;background-color:rgb(51 65 85 / var(--tw-bg-opacity, 1))}.hover\:text-emerald-400:hover{--tw-text-opacity:1;color:rgb(52 211 153 / var(--tw-text-opacity, 1))}.hover\:text-red-400:hover{--tw-text-opacity:1;color:rgb(248 113 113 / var(--tw-text-opacity, 1))}.hover\:text-white:hover{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}.focus\:border-b:focus{border-bottom-width:1px}.focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2px}.active\:scale-95:active{--tw-scale-x:.95;--tw-scale-y:.95;transform:translate(var(--tw-translate-x), var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.group:hover .group-hover\:text-white{--tw-text-opacity:1;color:rgb(255 255 255 / var(--tw-text-opacity, 1))}@media (min-width: 768px){.md\:mt-\[-20px\]{margin-top:-20px}.md\:inline{display:inline}.md\:h-16{height:4rem}.md\:h-8{height:2rem}.md\:h-10{height:2.5rem}.md\:w-16{width:4rem}.md\:w-8{width:2rem}.md\:w-10{width:2.5rem}.md\:gap-4{gap:1rem}.md\:gap-6{gap:1.5rem}.md\:p-12{padding:3rem}.md\:p-4{padding:1rem}.md\:py-2{padding-top:0.5rem;padding-bottom:0.5rem}.md\:py-3{padding-top:0.75rem;padding-bottom:0.75rem}.md\:py-4{padding-top:1rem;padding-bottom:1rem}.md\:text-3xl{font-size:1.875rem;line-height:2.25rem}.md\:text-6xl{font-size:3.75rem;line-height:1}.md\:text-\[10rem\]{font-size:10rem}.md\:text-\[16rem\]{font-size:16rem}.md\:text-base{font-size:1rem;line-height:1.5rem}.md\:text-sm{font-size:0.875rem;line-height:1.25rem}}@media (min-width: 1024px){.lg\:col-span-2{grid-column:span 2 / span 2}.lg\:col-span-4{grid-column:span 4 / span 4}.lg\:min-h-0{min-height:0px}.lg\:grid-cols-10{grid-template-columns:repeat(10, minmax(0, 1fr))}.lg\:gap-4{gap:1rem}.lg\:text-3xl{font-size:1.875rem;line-height:2.25rem}.lg\:text-5xl{font-size:3rem;line-height:1}.lg\:text-6xl{font-size:3.75rem;line-height:1}.lg\:text-7xl{font-size:4.5rem;line-height:1}.lg\:text-\[13rem\]{font-size:13rem}}</style></head>
+<body class="h-screen bg-slate-900 text-white font-sans p-2 md:p-4 flex flex-col items-center overflow-hidden">
+
+    <!-- 頂部資訊列 -->
+    <div class="w-full max-w-[1800px] flex justify-between items-center mb-2 px-2 z-10 h-14 shrink-0">
+        <div class="flex items-center gap-2 md:gap-4">
+            <button onclick="toggleModal(&#39;settings-modal&#39;, true)" class="bg-slate-800 text-blue-400 px-3 py-2 rounded-lg font-bold flex items-center gap-2 hover:bg-slate-700 transition text-sm md:text-base border border-slate-700">
+                <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="settings" aria-hidden="true" class="lucide lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg>
+                <span id="header-mode-text" class="hidden md:inline">設定</span>
+            </button>
+            
+            <!-- 修正：將此元素改為按鈕，並加入 toggleJackOwner 事件 -->
+            <button onclick="toggleJackOwner()" id="jack-indicator" class="bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm">暖身時間</button>
+        </div>
+        <button onclick="toggleModal(&#39;help-modal&#39;, true)" class="bg-slate-800 p-2 rounded-lg text-slate-400 hover:text-white transition">
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="info" aria-hidden="true" class="lucide lucide-info"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+        </button>
+    </div>
+
+    <!-- 主內容區 -->
+    <div class="w-full max-w-[1800px] grid grid-cols-1 lg:grid-cols-10 gap-2 lg:gap-4 relative flex-grow items-stretch pb-2 overflow-y-auto no-scrollbar overscroll-contain">
+
+        <!-- 紅隊區域 -->
+        <div id="red-panel" class="lg:col-span-4 bg-slate-800/50 rounded-3xl border-t-8 border-red-600 p-2 md:p-4 flex flex-col justify-between transition-all duration-300 relative overflow-hidden min-h-[400px] lg:min-h-0 opacity-60">
+            <div id="red-active-bg" class="absolute inset-0 bg-red-600/10 pointer-events-none hidden"></div>
+            
+            <div class="z-10 w-full text-center">
+                <input type="text" id="red-name" class="bg-transparent text-center w-full text-2xl md:text-3xl font-bold focus:outline-none focus:border-b border-red-500/50 text-red-100 placeholder-red-800/50" value="紅隊 (Red)">
+            </div>
+
+            <!-- 分數區 -->
+            <div class="z-10 flex-grow flex flex-col items-center justify-center py-2">
+                <div class="flex items-center justify-center w-full gap-2 md:gap-6">
+                    <button onclick="adjustScore(&#39;red&#39;, -1)" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" aria-hidden="true" class="lucide lucide-minus w-6 h-6 md:w-8 md:h-8"><path d="M5 12h14"></path></svg>
+                    </button>
+                    <div id="red-score" class="text-[8rem] md:text-[10rem] lg:text-[13rem] font-black text-red-500 leading-none tabular-nums drop-shadow-2xl select-none transition-all">2</div>
+                    <button onclick="adjustScore(&#39;red&#39;, 1)" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-red-900/30 hover:bg-red-600 text-red-400 hover:text-white flex items-center justify-center transition active:scale-95 border border-red-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-6 h-6 md:w-8 md:h-8"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                    </button>
+                </div>
+                <div class="text-red-500/30 font-bold uppercase tracking-[0.5em] text-xs md:text-sm mt-[-10px] md:mt-[-20px] select-none">SCORE</div>
+            </div>
+
+            <!-- 底部操作區 -->
+            <div class="z-10 flex flex-col items-center gap-3 w-full">
+                <button onclick="activateSide(&#39;red&#39;)" id="red-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 hover:text-white transition bg-slate-900/40 px-6 py-1 md:py-2 rounded-2xl border-2 border-red-500/20 hover:border-red-500 active:scale-95 shadow-lg w-full max-w-[320px]">02:00</button>
+
+                <div class="flex items-center justify-between w-full px-2">
+                    <div class="flex gap-2 p-2 bg-slate-900/30 rounded-xl" id="red-balls-container"><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button></div>
+                    
+                    <!-- 罰球計數器 -->
+                    <div class="flex flex-col items-end">
+                        <div class="text-[10px] text-red-300/70 mb-1">獲判罰球</div>
+                        <div class="flex items-center gap-2 bg-red-900/20 px-2 py-1 rounded border border-red-900/30">
+                            <!-- 增加減少按鈕 -->
+                            <button onclick="adjustPenaltyBalls(&#39;red&#39;, -1)" class="text-red-400 hover:text-white px-2 font-bold text-lg">-</button>
+                            <span id="red-penalty-count" class="text-red-400 font-bold text-lg w-4 text-center">0</span>
+                            <button onclick="adjustPenaltyBalls(&#39;red&#39;, 1)" class="bg-red-800 text-white rounded w-6 h-6 flex items-center justify-center text-sm hover:bg-red-700 font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 中控區域 -->
+        <div class="lg:col-span-2 flex flex-col gap-2 h-full min-h-[200px] lg:min-h-0">
+            <div class="bg-slate-800 rounded-2xl p-2 flex-grow flex flex-col items-center justify-center text-center shadow-xl border border-slate-700 min-h-[160px]">
+                <div class="flex flex-col items-center justify-center flex-grow">
+                    <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Class</div>
+                    <div id="center-class-display" class="text-4xl lg:text-6xl font-black text-white drop-shadow-lg mb-4">BC1</div>
+                    <div class="w-12 h-1 bg-slate-700 rounded-full mb-4"></div>
+                    <div id="round-info">
+                        <div class="text-slate-500 text-[10px] font-bold uppercase tracking-widest mb-1">Status</div>
+                        <div class="text-2xl lg:text-3xl font-bold text-amber-400 truncate px-1" id="center-end-text-container">
+                            <span id="center-end-display" class="text-white text-3xl lg:text-5xl mx-1 font-black">暖身</span>
+                        </div>
+                        <div class="text-slate-500 text-[10px] mt-1" id="total-ends-container">Warm Up - 同時暖身</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flex flex-col gap-2 shrink-0">
+                <button onclick="nextEnd()" id="next-btn" class="py-3 md:py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition shadow-lg flex items-center justify-center gap-2 text-sm md:text-base">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="play-circle" aria-hidden="true" class="lucide lucide-play-circle"><path d="M9 9.003a1 1 0 0 1 1.517-.859l4.997 2.997a1 1 0 0 1 0 1.718l-4.997 2.997A1 1 0 0 1 9 14.996z"></path><circle cx="12" cy="12" r="10"></circle></svg> 
+                    <span id="next-btn-text">開始比賽 (Start)</span>
+                </button>
+                <div class="grid grid-cols-2 gap-2">
+                    <button onclick="toggleModal(&#39;reset-modal&#39;, true)" class="py-2 md:py-3 bg-slate-700 text-slate-300 rounded-xl font-medium hover:bg-slate-600 text-xs md:text-sm">重置本局</button>
+                    <button onclick="endMatch()" class="py-2 md:py-3 bg-slate-800 border border-slate-600 text-slate-400 rounded-xl font-medium hover:bg-red-900/30 hover:text-red-400 text-xs md:text-sm">結束比賽</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- 藍隊區域 -->
+        <div id="blue-panel" class="lg:col-span-4 bg-slate-800/50 rounded-3xl border-t-8 border-sky-600 p-2 md:p-4 flex flex-col justify-between transition-all duration-300 relative overflow-hidden min-h-[400px] lg:min-h-0 opacity-60">
+            <div id="blue-active-bg" class="absolute inset-0 bg-sky-600/10 pointer-events-none hidden"></div>
+
+            <div class="z-10 w-full text-center">
+                <input type="text" id="blue-name" class="bg-transparent text-center w-full text-2xl md:text-3xl font-bold focus:outline-none focus:border-b border-sky-500/50 text-sky-100 placeholder-sky-800/50" value="藍隊 (Blue)">
+            </div>
+
+            <div class="z-10 flex-grow flex flex-col items-center justify-center py-2">
+                <div class="flex items-center justify-center w-full gap-2 md:gap-6">
+                    <button onclick="adjustScore(&#39;blue&#39;, -1)" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-slate-800/50 hover:bg-slate-700 text-slate-400 hover:text-white flex items-center justify-center transition active:scale-95">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="minus" aria-hidden="true" class="lucide lucide-minus w-6 h-6 md:w-8 md:h-8"><path d="M5 12h14"></path></svg>
+                    </button>
+                    <div id="blue-score" class="text-[8rem] md:text-[10rem] lg:text-[13rem] font-black text-sky-500 leading-none tabular-nums drop-shadow-2xl select-none transition-all">0</div>
+                    <button onclick="adjustScore(&#39;blue&#39;, 1)" class="w-12 h-12 md:w-16 md:h-16 rounded-full bg-sky-900/30 hover:bg-sky-600 text-sky-400 hover:text-white flex items-center justify-center transition active:scale-95 border border-sky-500/30">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="plus" aria-hidden="true" class="lucide lucide-plus w-6 h-6 md:w-8 md:h-8"><path d="M5 12h14"></path><path d="M12 5v14"></path></svg>
+                    </button>
+                </div>
+                <div class="text-sky-500/30 font-bold uppercase tracking-[0.5em] text-xs md:text-sm mt-[-10px] md:mt-[-20px] select-none">SCORE</div>
+            </div>
+
+            <div class="z-10 flex flex-col items-center gap-3 w-full">
+                <button onclick="activateSide(&#39;blue&#39;)" id="blue-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-sky-400 hover:text-white transition bg-slate-900/40 px-6 py-1 md:py-2 rounded-2xl border-2 border-sky-500/20 hover:border-sky-500 active:scale-95 shadow-lg w-full max-w-[320px]">02:00</button>
+
+                <div class="flex items-center justify-between w-full px-2">
+                    <div class="flex gap-2 p-2 bg-slate-900/30 rounded-xl" id="blue-balls-container"><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button></div>
+                    
+                    <!-- 罰球計數器 -->
+                    <div class="flex flex-col items-end">
+                        <div class="text-[10px] text-sky-300/70 mb-1">獲判罰球</div>
+                        <div class="flex items-center gap-2 bg-sky-900/20 px-2 py-1 rounded border border-sky-900/30">
+                            <!-- 增加減少按鈕 -->
+                            <button onclick="adjustPenaltyBalls(&#39;blue&#39;, -1)" class="text-sky-400 hover:text-white px-2 font-bold text-lg">-</button>
+                            <span id="blue-penalty-count" class="text-sky-400 font-bold text-lg w-4 text-center">0</span>
+                            <button onclick="adjustPenaltyBalls(&#39;blue&#39;, 1)" class="bg-sky-800 text-white rounded w-6 h-6 flex items-center justify-center text-sm hover:bg-sky-700 font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Modals -->
+
+    <!-- 特殊暫停全螢幕倒數 Modal -->
+    <div id="timeout-active-modal" class="hidden fixed inset-0 z-[130] bg-black/95 flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="w-full max-w-4xl text-center relative">
+            <h2 id="timeout-title" class="text-4xl md:text-6xl font-black text-white mb-12 animate-pulse">醫療暫停</h2>
+            <div id="timeout-timer" class="text-[8rem] md:text-[16rem] font-mono font-black text-white leading-none tabular-nums mb-12">10:00</div>
+            <div class="flex justify-center gap-6">
+                <button onclick="endSpecialTimeout()" class="bg-slate-700 border-2 border-slate-500 hover:bg-slate-600 text-white px-10 py-5 rounded-3xl font-bold text-2xl transition">
+                    結束暫停 (Resume)
+                </button>
+            </div>
+            <div class="mt-8 text-slate-500 text-sm">規則 19.1 &amp; 20.1: 暫停時間為 10 分鐘</div>
+        </div>
+    </div>
+
+    <!-- 罰球執行 Modal -->
+    <div id="penalty-modal" class="hidden fixed inset-0 z-[110] bg-slate-900/95 flex items-center justify-center p-4 backdrop-blur-md">
+        <div class="bg-slate-800 border-4 border-slate-600 p-8 md:p-12 rounded-[3rem] max-w-2xl w-full text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-4 bg-slate-600" id="penalty-bar"></div>
+            
+            <div class="mb-6">
+                <div class="uppercase tracking-widest text-slate-400 font-bold mb-2">Penalty Ball</div>
+                <h3 class="text-4xl font-black mb-2 text-white" id="penalty-team-name">紅隊投擲</h3>
+                <p class="text-xl text-slate-300" id="penalty-info">剩餘 1 球</p>
+            </div>
+            
+            <div class="relative mb-10">
+                <button onclick="togglePenaltyTimer()" class="w-full">
+                    <div class="text-[7rem] md:text-[10rem] font-black text-white font-mono tabular-nums leading-none cursor-pointer hover:text-emerald-400 transition drop-shadow-2xl" id="penalty-timer">01:00</div>
+                </button>
+                <div class="text-sm text-slate-500 mt-4">點擊時間 開始 / 暫停</div>
+            </div>
+            
+            <div class="grid grid-cols-2 gap-4">
+                <button onclick="penaltyScore()" class="py-5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-2xl font-bold text-2xl transition flex items-center justify-center gap-3 shadow-lg active:scale-95">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trophy" aria-hidden="true" class="lucide lucide-trophy"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"></path><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"></path><path d="M18 9h1.5a1 1 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"></path><path d="M6 9H4.5a1 1 0 0 1 0-5H6"></path></svg> 投進得分 (+1)
+                </button>
+                <button onclick="nextPenaltyShot()" class="py-5 bg-slate-700 hover:bg-slate-600 text-slate-200 border border-slate-500 rounded-2xl font-bold text-2xl transition active:scale-95">
+                    未得分 / 下一球
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 局間休息 Modal -->
+    <div id="break-modal" class="fixed inset-0 z-[110] bg-black/90 flex items-center justify-center p-4 backdrop-blur-md hidden">
+        <div class="bg-slate-800 border-2 border-amber-500/50 p-8 rounded-3xl max-w-md w-full text-center shadow-2xl relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-3 bg-gradient-to-r from-amber-600 to-yellow-400"></div>
+            <h3 class="text-3xl font-bold mb-2 text-amber-500 mt-4">局間休息 (Break)</h3>
+            <p class="text-slate-400 text-base mb-8">準備進行 <span id="next-end-desc" class="text-white font-bold text-xl">準備進行 <span class="text-white font-bold text-xl">第 2 局</span></span></p>
+            
+            <!-- Tie-Break 設定區 (只在進入 Tie-Break 時顯示) -->
+            <div id="tie-break-setup" class="hidden mb-6 p-4 bg-slate-700/50 rounded-xl border border-slate-600">
+                <p class="text-slate-300 text-sm mb-3 font-bold">誰先擲目標球？(擲銅板決定)</p>
+                <div class="flex gap-4 justify-center">
+                    <button onclick="setTieBreakStarter(&#39;red&#39;)" id="tb-btn-red" class="flex-1 py-3 bg-slate-800 border border-red-500/50 text-red-400 rounded-lg hover:bg-red-900/50 transition">紅隊先發</button>
+                    <button onclick="setTieBreakStarter(&#39;blue&#39;)" id="tb-btn-blue" class="flex-1 py-3 bg-slate-800 border border-sky-500/50 text-sky-400 rounded-lg hover:bg-sky-900/50 transition">藍隊先發</button>
+                </div>
+            </div>
+
+            <div class="text-9xl font-black text-white mb-10 font-mono tabular-nums" id="break-timer-display">59</div>
+            <button onclick="skipBreak()" class="w-full py-5 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl font-bold text-2xl transition flex items-center justify-center gap-3 shadow-lg">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="skip-forward" aria-hidden="true" class="lucide lucide-skip-forward"><path d="M21 4v16"></path><path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"></path></svg> 跳過 / 開始
+            </button>
+        </div>
+    </div>
+
+    <!-- 設定 Modal -->
+    <div id="settings-modal" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm hidden" onclick="toggleModal(&#39;settings-modal&#39;, false)">
+        <div class="bg-slate-800 p-6 rounded-3xl max-w-md w-full border border-slate-700 shadow-2xl overflow-y-auto max-h-[85vh]" onclick="event.stopPropagation()">
+            <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="settings" aria-hidden="true" class="lucide lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg> 賽制設定</h2>
+            
+            <div class="space-y-3 mb-8">
+                <button onclick="setGameMode(&#39;BC1&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC1 個人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 4:30</span></button>
+                <button onclick="setGameMode(&#39;BC2&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC2 / BC4 個人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 3:30</span></button>
+                <button onclick="setGameMode(&#39;BC3&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC3 個人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 6:00</span></button>
+                <button onclick="setGameMode(&#39;Team&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">團體賽 (Team)</span><span class="text-sm text-slate-400 group-hover:text-white">6 局 / 5:00</span></button>
+                <button onclick="setGameMode(&#39;PairBC3&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC3 雙人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 7:00</span></button>
+                <button onclick="setGameMode(&#39;PairBC4&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC4 雙人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 4:00</span></button>
+                <button onclick="setGameMode(&#39;WarmUpOnly&#39;)" class="w-full p-4 bg-slate-700 hover:bg-emerald-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">僅計時暖身 (2:00)</span><span class="text-sm text-slate-400 group-hover:text-white">不進入正規局</span></button>
+            </div>
+
+            <hr class="border-slate-600 my-6">
+
+            <h3 class="text-lg font-bold text-amber-400 mb-4 flex items-center gap-2"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="timer" aria-hidden="true" class="lucide lucide-timer"><line x1="10" x2="14" y1="2" y2="2"></line><line x1="12" x2="15" y1="14" y2="11"></line><circle cx="12" cy="14" r="8"></circle></svg> 特殊暫停 (10分鐘)</h3>
+            <div class="grid grid-cols-1 gap-3">
+                <button onclick="startTimeout(&#39;medical&#39;)" class="w-full p-4 bg-red-900/40 border border-red-500/50 rounded-xl flex items-center justify-between hover:bg-red-900/60 transition group">
+                    <span class="font-bold text-red-300 group-hover:text-white">醫療暫停 (Medical)</span>
+                    <span class="text-sm font-mono text-red-400 font-bold">10:00</span>
+                </button>
+                <button onclick="startTimeout(&#39;technical&#39;)" class="w-full p-4 bg-amber-900/40 border border-amber-500/50 rounded-xl flex items-center justify-between hover:bg-amber-900/60 transition group">
+                    <span class="font-bold text-amber-300 group-hover:text-white">技術暫停 (Technical)</span>
+                    <span class="text-sm font-mono text-amber-400 font-bold">10:00</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 保持原有的重置/結束/Help Modal -->
+    <div id="reset-modal" class="hidden fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-slate-800 border border-slate-700 p-8 rounded-3xl max-w-sm w-full text-center shadow-2xl">
+            <h3 class="text-xl font-bold mb-4 text-amber-500">重置本局？</h3>
+            <p class="text-slate-300 text-sm mb-6">這將重置本局的時間與球數，但保留總分。</p>
+            <div class="flex gap-3">
+                <button onclick="toggleModal(&#39;reset-modal&#39;, false)" class="flex-1 py-3 bg-slate-700 rounded-xl font-bold">取消</button>
+                <button onclick="resetCurrentEnd()" class="flex-1 py-3 bg-red-600 rounded-xl font-bold">確定重置</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="game-over-modal" class="hidden fixed inset-0 z-[100] bg-slate-900/95 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-slate-800 border-2 border-slate-700 p-10 rounded-[3rem] shadow-2xl max-w-2xl w-full text-center relative overflow-hidden">
+            <div class="absolute top-0 left-0 w-full h-2 bg-gradient-to-r from-red-500 via-purple-500 to-sky-500"></div>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="trophy" aria-hidden="true" class="lucide lucide-trophy mx-auto text-amber-500 w-20 h-20 mb-6"><path d="M10 14.66v1.626a2 2 0 0 1-.976 1.696A5 5 0 0 0 7 21.978"></path><path d="M14 14.66v1.626a2 2 0 0 0 .976 1.696A5 5 0 0 1 17 21.978"></path><path d="M18 9h1.5a1 1 0 0 0 0-5H18"></path><path d="M4 22h16"></path><path d="M6 9a6 6 0 0 0 12 0V3a1 1 0 0 0-1-1H7a1 1 0 0 0-1 1z"></path><path d="M6 9H4.5a1 1 0 0 1 0-5H6"></path></svg>
+            <h2 class="text-3xl font-black text-slate-400 mb-6">比賽結果</h2>
+            <div class="flex justify-center items-center gap-8 mb-8">
+                <div class="text-center"><div class="text-slate-500 mb-2">紅隊</div><div id="final-red-score" class="text-8xl font-black text-red-500">0</div></div>
+                <div class="text-4xl text-slate-600">:</div>
+                <div class="text-center"><div class="text-slate-500 mb-2">藍隊</div><div id="final-blue-score" class="text-8xl font-black text-sky-500">0</div></div>
+            </div>
+            <div id="winner-text" class="text-4xl font-bold text-white mb-8"></div>
+            <div class="flex flex-col gap-3">
+                <button onclick="resetMatch()" class="bg-blue-600 hover:bg-blue-500 text-white px-8 py-4 rounded-xl font-bold text-xl w-full">
+                    開始新比賽
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <div id="help-modal" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm hidden" onclick="toggleModal(&#39;help-modal&#39;, false)">
+        <div class="bg-slate-800 p-8 rounded-3xl max-w-lg w-full border border-slate-700 overflow-y-auto max-h-[80vh]" onclick="event.stopPropagation()">
+            <div class="flex justify-between items-center mb-6"><h2 class="text-xl font-bold text-blue-400">操作說明</h2><button onclick="toggleModal(&#39;help-modal&#39;, false)"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="x-circle" aria-hidden="true" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10"></circle><path d="m15 9-6 6"></path><path d="m9 9 6 6"></path></svg></button></div>
+            <div class="space-y-4 text-slate-300 text-sm">
+                <div class="bg-slate-900/50 p-4 rounded-xl"><h3 class="font-bold text-white mb-2">罰球 (Penalty)</h3><p>在紅/藍隊伍區點擊「+」記錄獲得的罰球數量。當正規時間結束點擊「下一局」時，若有未執行的罰球，系統會自動進入罰球執行模式 (每球 1 分鐘，雙方輪流執行，由先獲判者先發)。</p></div>
+                <div class="bg-slate-900/50 p-4 rounded-xl"><h3 class="font-bold text-white mb-2">特殊暫停</h3><p>點擊上方「設定」按鈕，在選單最下方可啟動 10 分鐘的醫療或技術暫停。</p></div>
+                <div class="bg-slate-900/50 p-4 rounded-xl"><h3 class="font-bold text-white mb-2">決勝局 (Tie-Break)</h3><p>若正規賽結束比分相同，系統會自動進入決勝局模式，直到分出勝負。</p></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 狀態管理 ---
+        let state = {
+            gameType: 'BC1',
+            matchTimePerEnd: 270,
+            timePerEnd: 270,
+            totalEnds: 4,
+            currentEnd: 1,
+            isWarmUp: true,
+            warmUpType: 'simultaneous',
+            isTieBreak: false, 
+            tieBreakCount: 0,  
+            tieBreakStarter: null, 
+            tieBreakWinner: null, 
+            firstPenaltySide: null, // 新增：記錄該局誰先獲得罰球
+            jackOwnerOverride: null, // 新增：手動切換發球方
+            red: { score: 0, timeLeft: 120, ballsPlayed: 0, timerStarts: 0, penaltyBalls: 0 },
+            blue: { score: 0, timeLeft: 120, ballsPlayed: 0, timerStarts: 0, penaltyBalls: 0 },
+            activeSide: null,
+            timerInterval: null
+        };
+        
+        let breakInterval = null;
+        let specialTimeoutInterval = null;
+        let penaltyState = { active: false, currentTeam: null, remaining: 0, timer: 60, isTimerRunning: false, timerInterval: null };
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initBallsUI();
+            updateDisplay();
+            lucide.createIcons();
+        });
+
+        // --- 核心邏輯 (計時、球數) ---
+        function activateSide(side) {
+            if (state.isWarmUp && state.warmUpType === 'simultaneous') {
+                if (state.activeSide === 'both') { pauseGame(); return; }
+                clearInterval(state.timerInterval);
+                state.activeSide = 'both';
+                updateActiveStatus();
+                state.timerInterval = setInterval(() => {
+                    if (state.red.timeLeft > 0) state.red.timeLeft--;
+                    if (state.blue.timeLeft > 0) state.blue.timeLeft--;
+                    updateTimerDisplay('red'); updateTimerDisplay('blue');
+                    if (state.red.timeLeft <= 0) { clearInterval(state.timerInterval); alert("暖身結束！"); }
+                }, 1000);
+                return;
+            }
+            if (side === state.activeSide) { pauseGame(); return; }
+            clearInterval(state.timerInterval);
+            state.activeSide = side;
+            if (!state.isWarmUp) { state[side].timerStarts++; updateBallsFromTimer(side); }
+            updateActiveStatus();
+            state.timerInterval = setInterval(() => {
+                if (state[side].timeLeft > 0) {
+                    state[side].timeLeft--;
+                    updateTimerDisplay(side);
+                } else {
+                    clearInterval(state.timerInterval);
+                    alert((side === 'red' ? '紅隊' : '藍隊') + " 時間到！");
+                }
+            }, 1000);
+        }
+
+        // 修改：加入對手動切換 (jackOwnerOverride) 的支援
+        function updateBallsFromTimer(side) {
+            if (state.isWarmUp) return;
+            
+            // 決定誰發目標球
+            let jackOwner = 'red'; // 預設紅
+            
+            if (state.jackOwnerOverride) {
+                jackOwner = state.jackOwnerOverride;
+            } else if (state.isTieBreak) {
+                // 決勝局：依據手動設定
+                jackOwner = state.tieBreakStarter || 'red'; // 若未設定預設紅
+            } else {
+                // 正規局：奇數局紅發，偶數局藍發
+                const isOddEnd = state.currentEnd % 2 !== 0;
+                jackOwner = isOddEnd ? 'red' : 'blue';
+            }
+            
+            let ballsToMark = side === jackOwner ? state[side].timerStarts - 1 : state[side].timerStarts;
+            ballsToMark = Math.max(0, Math.min(6, ballsToMark));
+            state[side].ballsPlayed = ballsToMark;
+            renderBalls(side);
+        }
+        
+        // 新增：切換發球方
+        window.toggleJackOwner = function() {
+            // 暖身或決勝局不允許此操作，或需要更複雜邏輯，暫時只在正規賽支援
+            if (state.isWarmUp) return;
+            
+            let currentJackOwner = 'red';
+            if (state.jackOwnerOverride) {
+                currentJackOwner = state.jackOwnerOverride;
+            } else if (state.isTieBreak) {
+                currentJackOwner = state.tieBreakStarter || 'red';
+            } else {
+                currentJackOwner = (state.currentEnd % 2 !== 0) ? 'red' : 'blue';
+            }
+            
+            // 切換
+            state.jackOwnerOverride = (currentJackOwner === 'red') ? 'blue' : 'red';
+            
+            // 重新計算球數並更新顯示
+            updateBallsFromTimer('red');
+            updateBallsFromTimer('blue');
+            updateDisplay(); // 更新頂部按鈕文字
+        }
+
+        function pauseGame() {
+            clearInterval(state.timerInterval);
+            state.activeSide = null;
+            updateActiveStatus();
+        }
+
+        function adjustScore(side, delta) {
+            if (state.isTieBreak) {
+                if (delta > 0) {
+                    state.tieBreakWinner = side;
+                    alert((side === 'red' ? '紅隊' : '藍隊') + " 在決勝局得分！(不計入總分)");
+                }
+            } else {
+                state[side].score = Math.max(0, state[side].score + delta);
+                document.getElementById(`${side}-score`).textContent = state[side].score;
+            }
+        }
+
+        // --- 罰球設定與執行邏輯 ---
+        window.adjustPenaltyBalls = function(side, delta) {
+            // 如果是增加罰球，且目前雙方都沒有罰球（代表這是本局的第一顆罰球），記錄誰先獲得
+            if (delta > 0 && state.red.penaltyBalls === 0 && state.blue.penaltyBalls === 0) {
+                state.firstPenaltySide = side;
+            }
+            // 如果是增加，且已經有人有罰球，但 firstPenaltySide 還沒設（可能被清空過），也設一下保險
+            else if (delta > 0 && state.firstPenaltySide === null) {
+                 state.firstPenaltySide = side;
+            }
+            
+            state[side].penaltyBalls = Math.max(0, state[side].penaltyBalls + delta);
+            document.getElementById(`${side}-penalty-count`).textContent = state[side].penaltyBalls;
+            
+            // 如果罰球數歸零，且雙方都沒了，重置 firstPenaltySide
+            if (state.red.penaltyBalls === 0 && state.blue.penaltyBalls === 0) {
+                state.firstPenaltySide = null;
+            }
+        }
+
+        window.nextEnd = function() {
+            if (state.isWarmUp) {
+                state.isWarmUp = false;
+                state.currentEnd = 1;
+                resetCurrentEnd(false);
+            } else {
+                // 優先檢查是否有罰球需要執行
+                if (state.red.penaltyBalls > 0 || state.blue.penaltyBalls > 0) {
+                    startPenaltyPhase();
+                } else {
+                    // 檢查是否是最後一局結束
+                    let isMatchOver = false;
+                    
+                    if (!state.isTieBreak) {
+                        // 正規賽結束檢查
+                        if (state.currentEnd >= state.totalEnds) {
+                            // 檢查平手
+                            if (state.red.score === state.blue.score) {
+                                // 進入決勝局準備
+                                startBreak(null, true); // true indicates tie break prep
+                                return;
+                            }
+                            isMatchOver = true;
+                        } else {
+                            // 還有下一局正規賽
+                            startBreak(state.currentEnd + 1);
+                            return;
+                        }
+                    } else {
+                        // 決勝局結束檢查
+                        // 檢查決勝局是否有勝者 (tieBreakWinner)
+                        if (state.tieBreakWinner) {
+                            isMatchOver = true;
+                        } else {
+                            // 還是沒人得分/平手，繼續 Tie Break
+                            startBreak(null, true);
+                            return;
+                        }
+                    }
+
+                    if (isMatchOver) {
+                        endMatch();
+                    }
+                }
+            }
+        }
+
+        function startPenaltyPhase() {
+            pauseGame();
+            penaltyState.active = true;
+            
+            let startSide = null;
+            
+            // 決定誰先開始罰球
+            if (state.red.penaltyBalls > 0 && state.blue.penaltyBalls > 0) {
+                // 雙方都有：依照 firstPenaltySide 決定誰先
+                startSide = state.firstPenaltySide || 'red'; // 若無紀錄預設紅
+            } else if (state.red.penaltyBalls > 0) {
+                startSide = 'red';
+            } else {
+                startSide = 'blue';
+            }
+            
+            setupPenaltyShot(startSide);
+            toggleModal('penalty-modal', true);
+        }
+
+        function setupPenaltyShot(team) {
+            penaltyState.currentTeam = team;
+            penaltyState.remaining = state[team].penaltyBalls;
+            penaltyState.timer = 60;
+            penaltyState.isTimerRunning = false;
+            if(penaltyState.timerInterval) clearInterval(penaltyState.timerInterval);
+            
+            const name = document.getElementById('penalty-team-name');
+            const infoText = document.getElementById('penalty-info');
+            const timerText = document.getElementById('penalty-timer');
+            const bar = document.getElementById('penalty-bar');
+            
+            name.textContent = team === 'red' ? '紅隊投擲' : '藍隊投擲';
+            name.className = team === 'red' ? 'text-4xl font-black mb-2 text-red-500' : 'text-4xl font-black mb-2 text-sky-500';
+            infoText.textContent = `剩餘 ${penaltyState.remaining} 顆罰球`;
+            timerText.textContent = "01:00";
+            timerText.classList.remove('text-amber-400', 'text-red-500');
+            bar.className = team === 'red' ? "absolute top-0 left-0 w-full h-4 bg-red-600" : "absolute top-0 left-0 w-full h-4 bg-sky-600";
+        }
+
+        window.togglePenaltyTimer = function() {
+            if (penaltyState.isTimerRunning) {
+                clearInterval(penaltyState.timerInterval);
+                penaltyState.isTimerRunning = false;
+            } else {
+                penaltyState.isTimerRunning = true;
+                penaltyState.timerInterval = setInterval(() => {
+                    penaltyState.timer--;
+                    const m = Math.floor(penaltyState.timer / 60);
+                    const s = penaltyState.timer % 60;
+                    document.getElementById('penalty-timer').textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                    if(penaltyState.timer <= 0) { clearInterval(penaltyState.timerInterval); penaltyState.isTimerRunning = false; alert("罰球時間到！"); }
+                }, 1000);
+            }
+        }
+
+        window.penaltyScore = function() {
+            if (state.isTieBreak) {
+                state.tieBreakWinner = penaltyState.currentTeam;
+                alert((penaltyState.currentTeam === 'red' ? '紅隊' : '藍隊') + " 在決勝局罰球得分！");
+            } else {
+                if (penaltyState.currentTeam) adjustScore(penaltyState.currentTeam, 1);
+            }
+        }
+
+        window.nextPenaltyShot = function() {
+            // 扣除並進入下一球
+            state[penaltyState.currentTeam].penaltyBalls--;
+            document.getElementById(`${penaltyState.currentTeam}-penalty-count`).textContent = state[penaltyState.currentTeam].penaltyBalls;
+            
+            const current = penaltyState.currentTeam;
+            const other = current === 'red' ? 'blue' : 'red';
+
+            // 輪流機制：
+            // 1. 如果對方還有罰球，換對方投
+            if (state[other].penaltyBalls > 0) {
+                setupPenaltyShot(other);
+            } 
+            // 2. 如果對方沒了，自己還有，繼續自己投
+            else if (state[current].penaltyBalls > 0) {
+                setupPenaltyShot(current);
+            }
+            // 3. 都沒了，結束
+            else {
+                toggleModal('penalty-modal', false);
+                if (state.isTieBreak) {
+                     if (state.tieBreakWinner) endMatch();
+                     else startBreak(null, true);
+                } else {
+                    if (state.currentEnd >= state.totalEnds) {
+                        if (state.red.score === state.blue.score) startBreak(null, true);
+                        else endMatch();
+                    } else {
+                        startBreak(state.currentEnd + 1);
+                    }
+                }
+            }
+        }
+
+        // --- 特殊暫停邏輯 ---
+        window.startTimeout = function(type) {
+            toggleModal('settings-modal', false); toggleModal('timeout-active-modal', true); pauseGame();
+            const title = document.getElementById('timeout-title'); const timer = document.getElementById('timeout-timer');
+            title.textContent = type === 'medical' ? "醫療暫停 (Medical)" : "技術暫停 (Technical)";
+            title.className = type === 'medical' ? "text-4xl md:text-6xl font-black text-red-500 mb-12 animate-pulse" : "text-4xl md:text-6xl font-black text-amber-500 mb-12 animate-pulse";
+            let timeLeft = 600; timer.textContent = "10:00";
+            if (specialTimeoutInterval) clearInterval(specialTimeoutInterval);
+            specialTimeoutInterval = setInterval(() => {
+                timeLeft--; const m = Math.floor(timeLeft / 60); const s = timeLeft % 60;
+                timer.textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
+                if (timeLeft <= 0) { clearInterval(specialTimeoutInterval); alert("暫停時間結束！"); }
+            }, 1000);
+        }
+
+        window.endSpecialTimeout = function() {
+            if (specialTimeoutInterval) clearInterval(specialTimeoutInterval); toggleModal('timeout-active-modal', false);
+        }
+
+        // --- 局間休息邏輯 ---
+        function startBreak(nextEndNum, isTieBreakPrep = false) {
+            pauseGame();
+            toggleModal('break-modal', true);
+            
+            const desc = document.getElementById('next-end-desc');
+            const tbSetup = document.getElementById('tie-break-setup');
+            
+            if (isTieBreakPrep) {
+                state.tieBreakCount++;
+                desc.innerHTML = `<span class="text-amber-400">平手！進入決勝局 (Tie Break ${state.tieBreakCount})</span>`;
+                tbSetup.classList.remove('hidden');
+                state.isTieBreak = true;
+                state.tieBreakStarter = null;
+                updateTieBreakBtns();
+            } else {
+                desc.innerHTML = `準備進行 <span class="text-white font-bold text-xl">第 ${nextEndNum} 局</span>`;
+                tbSetup.classList.add('hidden');
+            }
+
+            let timeLeft = 60; const display = document.getElementById('break-timer-display');
+            display.textContent = timeLeft; display.classList.remove('text-red-500'); 
+            if (breakInterval) clearInterval(breakInterval);
+            breakInterval = setInterval(() => {
+                timeLeft--; display.textContent = timeLeft;
+                if (timeLeft <= 15) display.classList.add('text-red-500');
+                if (timeLeft <= 0) skipBreak();
+            }, 1000);
+        }
+        
+        window.setTieBreakStarter = function(side) {
+            state.tieBreakStarter = side;
+            updateTieBreakBtns();
+        }
+        
+        function updateTieBreakBtns() {
+            const redBtn = document.getElementById('tb-btn-red');
+            const blueBtn = document.getElementById('tb-btn-blue');
+            
+            if (state.tieBreakStarter === 'red') {
+                redBtn.classList.replace('bg-slate-800', 'bg-red-600');
+                redBtn.classList.add('text-white');
+                blueBtn.classList.replace('bg-sky-600', 'bg-slate-800');
+                blueBtn.classList.remove('text-white');
+            } else if (state.tieBreakStarter === 'blue') {
+                blueBtn.classList.replace('bg-slate-800', 'bg-sky-600');
+                blueBtn.classList.add('text-white');
+                redBtn.classList.replace('bg-red-600', 'bg-slate-800');
+                redBtn.classList.remove('text-white');
+            } else {
+                redBtn.classList.replace('bg-red-600', 'bg-slate-800');
+                blueBtn.classList.replace('bg-sky-600', 'bg-slate-800');
+            }
+        }
+        
+        window.skipBreak = function() {
+            if (state.isTieBreak && !state.tieBreakStarter) {
+                alert("請先選擇決勝局由哪一方發目標球！");
+                return;
+            }
+            
+            if (breakInterval) clearInterval(breakInterval);
+            toggleModal('break-modal', false);
+            
+            if (!state.isTieBreak) {
+                state.currentEnd++;
+            }
+            
+            resetCurrentEnd(true);
+        }
+
+        // --- 通用/重置功能 ---
+        window.setGameMode = function(mode) {
+            state.gameType = mode;
+            let time = 270; let ends = 4; let isWarmUpOnly = false; let warmUpType = 'simultaneous';
+            switch(mode) {
+                case 'BC1': time = 270; ends = 4; warmUpType = 'simultaneous'; break;
+                case 'BC2': time = 210; ends = 4; warmUpType = 'simultaneous'; break;
+                case 'BC3': time = 360; ends = 4; warmUpType = 'simultaneous'; break;
+                case 'BC4': time = 210; ends = 4; warmUpType = 'simultaneous'; break;
+                case 'Team': time = 300; ends = 6; warmUpType = 'separate'; break;
+                case 'PairBC3': time = 420; ends = 4; warmUpType = 'separate'; break;
+                case 'PairBC4': time = 240; ends = 4; warmUpType = 'separate'; break;
+                case 'WarmUpOnly': time = 120; ends = 1; isWarmUpOnly = true; warmUpType = 'simultaneous'; break;
+            }
+            state.matchTimePerEnd = time; state.totalEnds = ends; state.warmUpType = warmUpType; state.currentEnd = 1;
+            
+            // 重置決勝局與罰球優先權
+            state.isTieBreak = false;
+            state.tieBreakCount = 0;
+            state.tieBreakStarter = null;
+            state.tieBreakWinner = null;
+            state.firstPenaltySide = null;
+            state.jackOwnerOverride = null;
+
+            if (isWarmUpOnly) { state.isWarmUp = true; state.timePerEnd = 120; } else { state.isWarmUp = true; state.timePerEnd = 120; }
+            let modeText = mode;
+            if (mode === 'PairBC3') modeText = "BC3 雙人"; if (mode === 'PairBC4') modeText = "BC4 雙人"; if (mode === 'Team') modeText = "團體賽"; if (mode === 'WarmUpOnly') modeText = "僅暖身";
+            document.getElementById('center-class-display').textContent = modeText.split(' ')[0];
+            document.getElementById('header-mode-text').textContent = `${modeText}`;
+            resetMatch(true); toggleModal('settings-modal', false);
+        }
+
+        window.resetCurrentEnd = function(keepScore = true) {
+            clearInterval(state.timerInterval); state.activeSide = null;
+            const timeToSet = state.isWarmUp ? 120 : state.matchTimePerEnd;
+            state.red.timeLeft = timeToSet; state.blue.timeLeft = timeToSet;
+            state.red.ballsPlayed = 0; state.blue.ballsPlayed = 0; state.red.timerStarts = 0; state.blue.timerStarts = 0;
+            state.red.penaltyBalls = 0; state.blue.penaltyBalls = 0; 
+            document.getElementById('red-penalty-count').textContent = 0; document.getElementById('blue-penalty-count').textContent = 0;
+            state.firstPenaltySide = null; // 重置本局罰球優先權
+            state.jackOwnerOverride = null; // 重置手動發球權
+
+            if (!keepScore) { state.red.score = 0; state.blue.score = 0; }
+            updateDisplay(); renderBalls('red'); renderBalls('blue'); toggleModal('reset-modal', false);
+        }
+
+        window.resetMatch = function(keepSettings = false) {
+            clearInterval(state.timerInterval); state.activeSide = null;
+            if (state.gameType !== 'WarmUpOnly') state.isWarmUp = true;
+            state.currentEnd = 1; 
+            
+            state.red.score = 0; 
+            state.blue.score = 0;
+            document.getElementById('red-score').textContent = 0;
+            document.getElementById('blue-score').textContent = 0;
+
+            state.red.penaltyBalls = 0; state.blue.penaltyBalls = 0;
+            state.isTieBreak = false;
+            state.tieBreakCount = 0;
+            state.tieBreakStarter = null;
+            state.tieBreakWinner = null;
+            state.firstPenaltySide = null; // 重置全場罰球優先權
+            state.jackOwnerOverride = null;
+
+            const timeToSet = 120;
+            state.red.timeLeft = timeToSet; state.blue.timeLeft = timeToSet;
+            state.red.ballsPlayed = 0; state.blue.ballsPlayed = 0;
+            state.red.timerStarts = 0; state.blue.timerStarts = 0;
+            document.getElementById('red-penalty-count').textContent = 0; document.getElementById('blue-penalty-count').textContent = 0;
+            updateDisplay(); renderBalls('red'); renderBalls('blue'); toggleModal('game-over-modal', false);
+        }
+
+        function endMatch() {
+            clearInterval(state.timerInterval);
+            document.getElementById('final-red-score').textContent = state.red.score;
+            document.getElementById('final-blue-score').textContent = state.blue.score;
+            let winnerText = "";
+            
+            if (state.isTieBreak && state.tieBreakWinner) {
+                if (state.tieBreakWinner === 'red') {
+                    winnerText = `<span class="text-pink-500">紅隊獲勝！ <span class="text-sm">(決勝局獲勝)</span></span>`;
+                } else {
+                    winnerText = `<span class="text-sky-500">藍隊獲勝！ <span class="text-sm">(決勝局獲勝)</span></span>`;
+                }
+            } else {
+                if (state.red.score > state.blue.score) winnerText = `<span class="text-pink-500">紅隊獲勝！</span>`;
+                else if (state.blue.score > state.red.score) winnerText = `<span class="text-sky-500">藍隊獲勝！</span>`;
+                else winnerText = `<span class="text-amber-500">平局 (Tie Break)</span>`;
+            }
+            
+            document.getElementById('winner-text').innerHTML = winnerText;
+            toggleModal('game-over-modal', true);
+        }
+
+        function initBallsUI() { renderBalls('red'); renderBalls('blue'); }
+        function renderBalls(side) {
+            const container = document.getElementById(`${side}-balls-container`); container.innerHTML = '';
+            const playedCount = state[side].ballsPlayed; const colorClass = side === 'red' ? 'ball-red' : 'ball-blue';
+            for(let i=0; i<6; i++) {
+                const ball = document.createElement('button');
+                let className = `boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ${colorClass}`;
+                if (i < playedCount) className += ' ball-filled';
+                ball.className = className;
+                ball.onclick = () => manualToggleBall(side, i);
+                container.appendChild(ball);
+            }
+        }
+        function manualToggleBall(side, index) {
+            if (index < state[side].ballsPlayed) state[side].ballsPlayed = index; else state[side].ballsPlayed = index + 1;
+            renderBalls(side);
+        }
+
+        function updateDisplay() {
+            const centerText = document.getElementById('center-end-display');
+            const subText = document.getElementById('total-ends-container');
+            const nextBtnText = document.getElementById('next-btn-text');
+            const nextBtn = document.getElementById('next-btn');
+            const jackEl = document.getElementById('jack-indicator');
+
+            if (state.isWarmUp) {
+                centerText.textContent = "暖身"; centerText.className = "text-white text-3xl lg:text-5xl mx-1 font-black";
+                let warmUpModeText = state.warmUpType === 'simultaneous' ? "同時暖身" : "分開暖身";
+                subText.textContent = `Warm Up - ${warmUpModeText}`;
+                nextBtnText.textContent = "開始比賽 (Start)";
+                nextBtn.className = "py-3 md:py-4 bg-emerald-600 text-white rounded-xl font-bold hover:bg-emerald-500 transition shadow-lg flex items-center justify-center gap-2 text-sm md:text-base";
+                jackEl.textContent = "暖身時間"; jackEl.className = "bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm";
+            } else if (state.isTieBreak) {
+                centerText.textContent = `TB ${state.tieBreakCount}`;
+                centerText.className = "text-amber-400 text-4xl lg:text-6xl mx-1 font-black";
+                subText.innerHTML = "決勝局 (Tie Break)";
+                nextBtnText.textContent = "下一局 / 結束";
+                nextBtn.className = "py-3 md:py-4 bg-amber-600 text-white rounded-xl font-bold hover:bg-amber-500 transition shadow-lg flex items-center justify-center gap-2 text-sm md:text-base";
+                
+                // 優先使用手動覆蓋，否則使用預設
+                let currentStarter = state.jackOwnerOverride || state.tieBreakStarter || 'red';
+                
+                if (currentStarter === 'red') {
+                    jackEl.textContent = "紅方發球 (Jack)"; jackEl.className = "bg-red-900/50 text-red-200 border border-red-800 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm";
+                } else if (currentStarter === 'blue') {
+                    jackEl.textContent = "藍方發球 (Jack)"; jackEl.className = "bg-sky-900/50 text-sky-200 border border-sky-800 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm";
+                } else {
+                    jackEl.textContent = "待定"; jackEl.className = "bg-slate-700 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm";
+                }
+            } else {
+                centerText.textContent = state.currentEnd; centerText.className = "text-white text-4xl lg:text-6xl mx-1 font-black";
+                subText.innerHTML = `共 <span id="center-total-ends">${state.totalEnds}</span> 局`;
+                nextBtnText.textContent = "下一局 (Next End)";
+                nextBtn.className = "py-3 md:py-4 bg-blue-600 text-white rounded-xl font-bold hover:bg-blue-500 transition shadow-lg flex items-center justify-center gap-2 text-sm md:text-base";
+                
+                // 優先使用手動覆蓋
+                let currentStarter = state.jackOwnerOverride;
+                if (!currentStarter) {
+                     const isOddEnd = state.currentEnd % 2 !== 0;
+                     currentStarter = isOddEnd ? 'red' : 'blue';
+                }
+
+                if (currentStarter === 'red') { jackEl.textContent = "紅方發球 (Jack: Red)"; jackEl.className = "bg-red-900/50 text-red-200 border border-red-800 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm"; } 
+                else { jackEl.textContent = "藍方發球 (Jack: Blue)"; jackEl.className = "bg-sky-900/50 text-sky-200 border border-sky-800 text-slate-300 px-4 py-2 rounded-lg font-bold text-sm"; }
+            }
+            updateTimerDisplay('red'); updateTimerDisplay('blue'); updateActiveStatus();
+        }
+
+        function updateTimerDisplay(side) {
+            document.getElementById(`${side}-timer-btn`).textContent = formatTime(state[side].timeLeft);
+            if (state[side].timeLeft <= 30) {
+                 document.getElementById(`${side}-timer-btn`).classList.add('text-amber-400');
+                 document.getElementById(`${side}-timer-btn`).classList.remove(side === 'red' ? 'text-red-400' : 'text-sky-400');
+            } else {
+                 document.getElementById(`${side}-timer-btn`).classList.remove('text-amber-400');
+                 document.getElementById(`${side}-timer-btn`).classList.add(side === 'red' ? 'text-red-400' : 'text-sky-400');
+            }
+        }
+
+        function updateActiveStatus() {
+            const redBg = document.getElementById('red-active-bg'); const blueBg = document.getElementById('blue-active-bg');
+            const redPanel = document.getElementById('red-panel'); const bluePanel = document.getElementById('blue-panel');
+            redBg.classList.add('hidden'); blueBg.classList.add('hidden');
+            redPanel.classList.remove('ring-4', 'ring-red-500', 'scale-[1.02]'); bluePanel.classList.remove('ring-4', 'ring-sky-500', 'scale-[1.02]');
+            redPanel.classList.add('opacity-60'); bluePanel.classList.add('opacity-60');
+            
+            if (state.activeSide === 'both') {
+                redBg.classList.remove('hidden'); redPanel.classList.add('ring-4', 'ring-red-500', 'scale-[1.02]'); redPanel.classList.remove('opacity-60');
+                blueBg.classList.remove('hidden'); bluePanel.classList.add('ring-4', 'ring-sky-500', 'scale-[1.02]'); bluePanel.classList.remove('opacity-60');
+            } else if (state.activeSide === 'red') {
+                redBg.classList.remove('hidden'); redPanel.classList.add('ring-4', 'ring-red-500', 'scale-[1.02]'); redPanel.classList.remove('opacity-60');
+            } else if (state.activeSide === 'blue') {
+                blueBg.classList.remove('hidden'); bluePanel.classList.add('ring-4', 'ring-sky-500', 'scale-[1.02]'); bluePanel.classList.remove('opacity-60');
+            }
+            lucide.createIcons();
+        }
+
+        function formatTime(seconds) {
+            const m = Math.floor(seconds / 60); const s = seconds % 60;
+            return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+        }
+
+        window.toggleModal = function(id, show) {
+            const el = document.getElementById(id);
+            if (show) el.classList.remove('hidden'); else el.classList.add('hidden');
+        }
+    </script>
+
+</body></html>
