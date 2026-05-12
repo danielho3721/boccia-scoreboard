@@ -67,7 +67,11 @@
 
             <!-- 底部操作區 -->
             <div class="z-10 flex flex-col items-center gap-3 w-full">
-                <button onclick="activateSide(&#39;red&#39;)" id="red-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 hover:text-white transition bg-slate-900/40 px-6 py-1 md:py-2 rounded-2xl border-2 border-red-500/20 hover:border-red-500 active:scale-95 shadow-lg w-full max-w-[320px]">02:00</button>
+                <div class="flex items-center justify-center gap-2 w-full max-w-[420px]">
+                    <button onclick="adjustSideTime(&#39;red&#39;, -1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-red-900/50 text-red-300 hover:text-white border border-red-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">-</button>
+                    <button onclick="activateSide(&#39;red&#39;)" id="red-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 hover:text-white transition bg-slate-900/40 px-4 py-1 md:py-2 rounded-2xl border-2 border-red-500/20 hover:border-red-500 active:scale-95 shadow-lg flex-1 min-w-0">02:00</button>
+                    <button onclick="adjustSideTime(&#39;red&#39;, 1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-red-900/50 text-red-300 hover:text-white border border-red-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">+</button>
+                </div>
 
                 <div class="flex items-center justify-between w-full px-2">
                     <div class="flex gap-2 p-2 bg-slate-900/30 rounded-xl" id="red-balls-container"><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-red"></button></div>
@@ -137,7 +141,11 @@
             </div>
 
             <div class="z-10 flex flex-col items-center gap-3 w-full">
-                <button onclick="activateSide(&#39;blue&#39;)" id="blue-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-sky-400 hover:text-white transition bg-slate-900/40 px-6 py-1 md:py-2 rounded-2xl border-2 border-sky-500/20 hover:border-sky-500 active:scale-95 shadow-lg w-full max-w-[320px]">02:00</button>
+                <div class="flex items-center justify-center gap-2 w-full max-w-[420px]">
+                    <button onclick="adjustSideTime(&#39;blue&#39;, -1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-sky-900/50 text-sky-300 hover:text-white border border-sky-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">-</button>
+                    <button onclick="activateSide(&#39;blue&#39;)" id="blue-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-sky-400 hover:text-white transition bg-slate-900/40 px-4 py-1 md:py-2 rounded-2xl border-2 border-sky-500/20 hover:border-sky-500 active:scale-95 shadow-lg flex-1 min-w-0">02:00</button>
+                    <button onclick="adjustSideTime(&#39;blue&#39;, 1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-sky-900/50 text-sky-300 hover:text-white border border-sky-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">+</button>
+                </div>
 
                 <div class="flex items-center justify-between w-full px-2">
                     <div class="flex gap-2 p-2 bg-slate-900/30 rounded-xl" id="blue-balls-container"><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button><button class="boccia-ball w-8 h-8 md:w-10 md:h-10 rounded-full border-2 shadow-sm ball-blue"></button></div>
@@ -427,6 +435,11 @@
                 state[side].score = Math.max(0, state[side].score + delta);
                 document.getElementById(`${side}-score`).textContent = state[side].score;
             }
+        }
+
+        window.adjustSideTime = function(side, delta) {
+            state[side].timeLeft = Math.max(0, state[side].timeLeft + delta);
+            updateTimerDisplay(side);
         }
 
         // --- 罰球設定與執行邏輯 ---
