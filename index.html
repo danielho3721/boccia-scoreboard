@@ -547,7 +547,10 @@
                     const m = Math.floor(penaltyState.timer / 60);
                     const s = penaltyState.timer % 60;
                     document.getElementById('penalty-timer').textContent = `${m.toString().padStart(2,'0')}:${s.toString().padStart(2,'0')}`;
-                    if(penaltyState.timer <= 0) { clearInterval(penaltyState.timerInterval); penaltyState.isTimerRunning = false; alert("罰球時間到！"); }
+                    if (penaltyState.timer <= 0) {
+                        clearInterval(penaltyState.timerInterval);
+                        penaltyState.isTimerRunning = false;
+                    }
                 }, 1000);
             }
         }
