@@ -221,7 +221,7 @@
 
             <div class="text-9xl font-black text-white mb-10 font-mono tabular-nums" id="break-timer-display">59</div>
             <button onclick="skipBreak()" class="w-full py-5 bg-slate-700 hover:bg-slate-600 text-white rounded-2xl font-bold text-2xl transition flex items-center justify-center gap-3 shadow-lg">
-                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="skip-forward" aria-hidden="true" class="lucide lucide-skip-forward"><path d="M21 4v16"></path><path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"></path></svg> 跳過 / 開始
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="skip-forward" aria-hidden="true" class="lucide lucide-skip-forward"><path d="M21 4v16"></path><path d="M6.029 4.285A2 2 0 0 0 3 6v12a2 2 0 0 0 3.029 1.715l9.997-5.998a2 2 0 0 0 .003-3.432z"></path></svg> <span id="break-action-text">開始計時</span>
             </button>
         </div>
     </div>
@@ -322,6 +322,8 @@
         };
         
         let breakInterval = null;
+        let breakTimeLeft = 60;
+        let isBreakTimerRunning = false;
         let specialTimeoutInterval = null;
         let penaltyState = { active: false, currentTeam: null, remaining: 0, timer: 60, isTimerRunning: false, timerInterval: null };
 
@@ -632,13 +634,22 @@
                 tbSetup.classList.add('hidden');
             }
 
-            let timeLeft = 60; const display = document.getElementById('break-timer-display');
-            display.textContent = timeLeft; display.classList.remove('text-red-500'); 
+            breakTimeLeft = 60;
+            isBreakTimerRunning = false;
+            const display = document.getElementById('break-timer-display');
+            display.textContent = breakTimeLeft; display.classList.remove('text-red-500');
+            document.getElementById('break-action-text').textContent = '開始計時';
             if (breakInterval) clearInterval(breakInterval);
+        }
+
+        function startBreakCountdown() {
+            isBreakTimerRunning = true;
+            document.getElementById('break-action-text').textContent = '跳過 / 開始';
+            const display = document.getElementById('break-timer-display');
             breakInterval = setInterval(() => {
-                timeLeft--; display.textContent = timeLeft;
-                if (timeLeft <= 15) display.classList.add('text-red-500');
-                if (timeLeft <= 0) skipBreak();
+                breakTimeLeft--; display.textContent = breakTimeLeft;
+                if (breakTimeLeft <= 15) display.classList.add('text-red-500');
+                if (breakTimeLeft <= 0) skipBreak();
             }, 1000);
         }
         
@@ -672,8 +683,14 @@
                 alert("請先選擇決勝局由哪一方發目標球！");
                 return;
             }
+
+            if (!isBreakTimerRunning) {
+                startBreakCountdown();
+                return;
+            }
             
             if (breakInterval) clearInterval(breakInterval);
+            isBreakTimerRunning = false;
             toggleModal('break-modal', false);
             
             if (!state.isTieBreak) {
