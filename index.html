@@ -16,18 +16,20 @@
         .ball-red.ball-filled { background-color: #dc2626; box-shadow: 0 0 8px rgba(220, 38, 38, 0.6); }
         .ball-blue { border: 3px solid #0284c7; }
         .ball-blue.ball-filled { background-color: #0284c7; box-shadow: 0 0 8px rgba(2, 132, 199, 0.6); }
-        body.projection-mode { padding: 0.25rem !important; }
-        body.projection-mode #top-bar { max-width: none; height: 2.5rem; margin-bottom: 0.25rem; padding-left: 0.25rem; padding-right: 0.25rem; }
-        body.projection-mode #scoreboard-layout { max-width: none; grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr) minmax(0, 1fr); gap: 0.35rem; padding-bottom: 0; overflow: hidden; }
-        body.projection-mode #red-panel,
-        body.projection-mode #blue-panel,
-        body.projection-mode #center-panel > div:first-child { min-height: 0; border-radius: 1rem; }
-        body.projection-mode #red-panel,
-        body.projection-mode #blue-panel { padding: 0.45rem; }
-        body.projection-mode #center-panel { min-height: 0; gap: 0.35rem; }
-        body.projection-mode #red-timer-btn,
-        body.projection-mode #blue-timer-btn { font-size: min(10.5vw, 8.5rem) !important; padding-top: 0.2rem; padding-bottom: 0.25rem; }
-        body.projection-mode button[onclick^="adjustSideTime"] { width: 3rem; height: 3rem; font-size: 2rem; flex-shrink: 0; }
+        @media (orientation: landscape) and (min-width: 760px) {
+            body.projection-mode { padding: 0.25rem !important; }
+            body.projection-mode #top-bar { max-width: none; height: 2.5rem; margin-bottom: 0.25rem; padding-left: 0.25rem; padding-right: 0.25rem; }
+            body.projection-mode #scoreboard-layout { max-width: none; grid-template-columns: minmax(0, 1fr) minmax(150px, 0.42fr) minmax(0, 1fr); gap: 0.35rem; padding-bottom: 0; overflow: hidden; }
+            body.projection-mode #red-panel,
+            body.projection-mode #blue-panel,
+            body.projection-mode #center-panel > div:first-child { min-height: 0; border-radius: 1rem; }
+            body.projection-mode #red-panel,
+            body.projection-mode #blue-panel { padding: 0.45rem; }
+            body.projection-mode #center-panel { min-height: 0; gap: 0.35rem; }
+            body.projection-mode #red-timer-btn,
+            body.projection-mode #blue-timer-btn { font-size: min(10.5vw, 8.5rem) !important; padding-top: 0.2rem; padding-bottom: 0.25rem; }
+            body.projection-mode button[onclick^="adjustSideTime"] { width: 3rem; height: 3rem; font-size: 2rem; flex-shrink: 0; }
+        }
         
         /* 隱藏捲軸但保留捲動功能 */
         .no-scrollbar::-webkit-scrollbar { display: none; }
