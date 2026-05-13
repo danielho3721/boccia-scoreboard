@@ -69,7 +69,7 @@
             <div class="z-10 flex flex-col items-center gap-3 w-full">
                 <div class="flex items-center justify-center gap-2 w-full max-w-[420px]">
                     <button onclick="adjustSideTime(&#39;red&#39;, -1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-red-900/50 text-red-300 hover:text-white border border-red-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">-</button>
-                    <button onclick="activateSide(&#39;red&#39;)" id="red-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-red-400 hover:text-white transition bg-slate-900/40 px-4 py-1 md:py-2 rounded-2xl border-2 border-red-500/20 hover:border-red-500 active:scale-95 shadow-lg flex-1 min-w-0">02:00</button>
+                    <button onclick="activateSide(&#39;red&#39;)" id="red-timer-btn" style="font-size: min(8vw, 7rem); line-height: 1;" class="font-mono font-bold text-red-400 hover:text-white transition bg-slate-900/40 px-3 py-2 md:py-3 rounded-2xl border-2 border-red-500/20 hover:border-red-500 active:scale-95 shadow-lg flex-1 min-w-0 tabular-nums">02:00</button>
                     <button onclick="adjustSideTime(&#39;red&#39;, 1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-red-900/50 text-red-300 hover:text-white border border-red-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">+</button>
                 </div>
 
@@ -143,7 +143,7 @@
             <div class="z-10 flex flex-col items-center gap-3 w-full">
                 <div class="flex items-center justify-center gap-2 w-full max-w-[420px]">
                     <button onclick="adjustSideTime(&#39;blue&#39;, -1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-sky-900/50 text-sky-300 hover:text-white border border-sky-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">-</button>
-                    <button onclick="activateSide(&#39;blue&#39;)" id="blue-timer-btn" class="text-5xl md:text-6xl lg:text-7xl font-mono font-bold text-sky-400 hover:text-white transition bg-slate-900/40 px-4 py-1 md:py-2 rounded-2xl border-2 border-sky-500/20 hover:border-sky-500 active:scale-95 shadow-lg flex-1 min-w-0">02:00</button>
+                    <button onclick="activateSide(&#39;blue&#39;)" id="blue-timer-btn" style="font-size: min(8vw, 7rem); line-height: 1;" class="font-mono font-bold text-sky-400 hover:text-white transition bg-slate-900/40 px-3 py-2 md:py-3 rounded-2xl border-2 border-sky-500/20 hover:border-sky-500 active:scale-95 shadow-lg flex-1 min-w-0 tabular-nums">02:00</button>
                     <button onclick="adjustSideTime(&#39;blue&#39;, 1)" class="w-12 h-12 md:w-14 md:h-14 rounded-full bg-slate-900/60 hover:bg-sky-900/50 text-sky-300 hover:text-white border border-sky-500/30 font-black text-3xl flex items-center justify-center transition active:scale-95">+</button>
                 </div>
 
@@ -238,7 +238,7 @@
     <div id="settings-modal" class="fixed inset-0 z-50 bg-black/80 flex items-center justify-center p-4 backdrop-blur-sm hidden" onclick="toggleModal(&#39;settings-modal&#39;, false)">
         <div class="bg-slate-800 p-6 rounded-3xl max-w-md w-full border border-slate-700 shadow-2xl overflow-y-auto max-h-[85vh]" onclick="event.stopPropagation()">
             <h2 class="text-2xl font-bold text-white mb-6 flex items-center gap-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" data-lucide="settings" aria-hidden="true" class="lucide lucide-settings"><path d="M9.671 4.136a2.34 2.34 0 0 1 4.659 0 2.34 2.34 0 0 0 3.319 1.915 2.34 2.34 0 0 1 2.33 4.033 2.34 2.34 0 0 0 0 3.831 2.34 2.34 0 0 1-2.33 4.033 2.34 2.34 0 0 0-3.319 1.915 2.34 2.34 0 0 1-4.659 0 2.34 2.34 0 0 0-3.32-1.915 2.34 2.34 0 0 1-2.33-4.033 2.34 2.34 0 0 0 0-3.831A2.34 2.34 0 0 1 6.35 6.051a2.34 2.34 0 0 0 3.319-1.915"></path><circle cx="12" cy="12" r="3"></circle></svg> 賽制設定</h2>
-            
+
             <div class="space-y-3 mb-8">
                 <button onclick="setGameMode(&#39;BC1&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC1 個人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 4:30</span></button>
                 <button onclick="setGameMode(&#39;BC2&#39;)" class="w-full p-4 bg-slate-700 hover:bg-blue-600 rounded-xl flex justify-between items-center group transition"><span class="font-bold text-lg">BC2 / BC4 個人賽</span><span class="text-sm text-slate-400 group-hover:text-white">4 局 / 3:30</span></button>
@@ -262,6 +262,13 @@
                     <span class="text-sm font-mono text-amber-400 font-bold">10:00</span>
                 </button>
             </div>
+
+            <hr class="border-slate-600 my-6">
+
+            <button onclick="swapTeamNames()" class="w-full p-4 bg-slate-700 hover:bg-emerald-600 rounded-xl flex justify-between items-center group transition">
+                <span class="font-bold text-lg flex items-center gap-2"><i data-lucide="arrow-left-right" class="w-5 h-5"></i>互換隊名</span>
+                <span class="text-sm text-slate-400 group-hover:text-white">紅隊 ↔ 藍隊</span>
+            </button>
         </div>
     </div>
 
@@ -440,6 +447,14 @@
         window.adjustSideTime = function(side, delta) {
             state[side].timeLeft = Math.max(0, state[side].timeLeft + delta);
             updateTimerDisplay(side);
+        }
+
+        window.swapTeamNames = function() {
+            const redName = document.getElementById('red-name');
+            const blueName = document.getElementById('blue-name');
+            const originalRedName = redName.value;
+            redName.value = blueName.value;
+            blueName.value = originalRedName;
         }
 
         // --- 罰球設定與執行邏輯 ---
